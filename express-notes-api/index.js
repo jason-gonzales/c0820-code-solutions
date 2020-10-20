@@ -4,26 +4,25 @@ const app = express();
 const fs = require('fs');
 
 const jsonData = require('./data.json');
-const notes = Object.values(jsonData.notes);
 
 const middleWare = express.json();
 app.use(middleWare);
 
 app.get('/api/notes', (req, res) => {
 
-  res.status(200).json(notes);
+  res.status(200).json(Object.values(jsonData.notes));
 });
 
 app.get('/api/notes/:id', (req, res) => {
-  // eslint-disable-next-line no-console
+
   const id = parseInt(req.params.id, 10);
   if (id < 1 || !id || !Number.isInteger(id)) {
     res.status(400).json({ error: 'user needs to put a positive number' });
     return;
   }
-  for (let i = 0; i < notes.length; i++) {
-    if (id === notes[i].id) {
-      res.status(200).json(notes[i]);
+  for (let i = 0; i < jsonData.length; i++) {
+    if (id === jsonData[i].id) {
+      res.status(200).json(jsonData[i]);
       return;
     }
   }
@@ -37,21 +36,22 @@ app.post('/api/notes', (req, res) => {
     return;
   }
 
-  req.body.id = jsonData.nextId;
-  jsonData.notes[jsonData.nextId] = req.body;
-  jsonData.notes[jsonData.nextId].id = jsonData.nextId;
-  jsonData.nextId++;
+  if (Object.keys(req.body).length > 0) {
+  // req.body.id = jsonData.nextId;
+    jsonData.notes[jsonData.nextId] = req.body;
+    jsonData.notes[jsonData.nextId].id = jsonData.nextId;
+    jsonData.nextId++;
 
-  const dataString = JSON.stringify(jsonData, null, 2);
-  fs.writeFile('data.json', dataString, 'utf8', err => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ error: 'An unexpected error occured.' });
-      return;
-    }
-    res.status(201).json(req.body);
-  });
-
+    const dataString = JSON.stringify(jsonData, null, 2);
+    fs.writeFile('data.json', dataString, 'utf8', err => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'An unexpected error occured.' });
+        return;
+      }
+      res.status(201).json(req.body);
+    });
+  }
 });
 
 app.delete('/api/notes/:id', (req, res) => {
@@ -59,7 +59,6 @@ app.delete('/api/notes/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
   if (id < 1 || !id || !Number.isInteger(id)) {
     res.status(400).json({ error: 'user needs to put a positive number' });
-    return;
   } else if (req.body.content === undefined) {
     res.status(400).json({ error: 'content is required' });
   }
@@ -74,6 +73,7 @@ app.delete('/api/notes/:id', (req, res) => {
         res.sendStatus(204);
       }
     });
+    return;
   }
   res.status(404).json({ error: `cannot find note with id ${id}` });
 
@@ -103,6 +103,7 @@ app.put('/api/notes/:id', (req, res) => {
   fs.writeFile('data.json', dataString, 'utf8', err => {
     if (err) {
       res.status(500).json({ error: 'An unexpected error occured.' });
+      return;
     }
     res.status(200).json(jsonData.notes[id]);
   });
