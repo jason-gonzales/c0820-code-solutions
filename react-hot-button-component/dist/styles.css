@@ -1,0 +1,39 @@
+
+button {
+  padding: 20px;
+  box-shadow: 5px 5px rgb(1, 1, 22);
+  font-weight: bolder;
+}
+
+.grey {
+  background-color: rgb(104, 94, 94);
+  color: whitesmoke;
+}
+
+.navy {
+  background-color: navy;
+  color: white;
+}
+
+.purple {
+  background-color: rgb(153, 118, 153);
+  color: white;
+}
+
+.red {
+  background-color: rgb(209, 94, 94);
+  color: white;
+}
+
+.orange {
+  background-color: rgb(236, 195, 117);
+}
+
+.yellow {
+  background-color: yellow;
+  color: purple;
+}
+
+.white {
+  background-color: white;
+}
