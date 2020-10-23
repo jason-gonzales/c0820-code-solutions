@@ -19,20 +19,27 @@ class HotButton extends React.Component {
     const click = this.state.click;
     let color = '';
 
-    if (click < 3) {
-      color = 'grey';
-    } else if (click >= 3 && click < 6) {
-      color = 'navy';
-    } else if (click >= 6 && click < 9) {
-      color = 'purple';
-    } else if (click >= 9 && click < 12) {
-      color = 'red';
-    } else if (click >= 12 && click < 15) {
-      color = 'orange';
-    } else if (click >= 15 && click < 18) {
-      color = 'yellow';
-    } else if (click > 18) {
-      color = 'white';
+    switch (true) {
+      case click > 18:
+        color = 'white';
+        break;
+      case click > 14:
+        color = 'yellow';
+        break;
+      case click > 11:
+        color = 'orange';
+        break;
+      case click > 8:
+        color = 'red';
+        break;
+      case click > 5:
+        color = 'purple';
+        break;
+      case click > 2:
+        color = 'navy';
+        break;
+      default:
+        color = 'grey';
     }
 
     return (
