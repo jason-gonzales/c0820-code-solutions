@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.watch {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px solid;
+  display: flex;
+  justify-content: center;
+}
+
+.number {
+  position: relative;
+  font-size: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  position: absolute;
+  top: 230px;
+}
+
+.fas {
+  color: rgb(228, 17, 9);
+  font-size: 60px;
+}
