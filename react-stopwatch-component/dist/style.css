@@ -2,10 +2,10 @@
   display: flex;
   justify-content: center;
 
+
 }
 
 .watch {
-  position:relative;
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -23,13 +23,13 @@
 }
 
 .icon {
-  position: relative;
-  display: flex;
+  position: absolute;
+  top: 230px;
 
 }
 
-.far {
-  color: red;
+.fas {
+  color:rgb(230, 25, 25);
   font-size: 60px;
 
 }
