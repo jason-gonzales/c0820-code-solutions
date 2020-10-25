@@ -4,55 +4,48 @@ class AppDrawer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuClicked: false,
-      iconClicked: false
+      isOpen: false
 
     };
-    this.showMenu = this.showMenu.bind(this);
-    this.hideMenu = this.hideMenu.bind(this);
+    this.showPage = this.showPage.bind(this);
+
   }
 
-  showMenu() {
-    this.setState({
-      iconClicked: true
-    });
-  }
-
-  hideMenu() {
-    this.setState({
-      menuClicked: true,
-      iconClicked: false
-    });
+  showPage() {
+    if (this.state.isOpen === false) {
+      this.setState({
+        isOpen: true
+      });
+    } else {
+      this.setState({
+        isOpen: false
+      });
+    }
   }
 
   render() {
-    if (this.state.iconClicked) {
+    if (this.state.isOpen) {
       return (
         <div className='container'>
           <div className='nav'>
             <h3>Menu</h3>
             <ul>
-              <li onClick={this.hideMenu}><a href=''>About</a></li>
-              <li onClick={this.hideMenu}><a href=''>Get Started</a></li>
-              <li onClick={this.hideMenu}><a href=''>Sign In</a></li>
+              <li onClick={this.showPage}><a href=''>About</a></li>
+              <li onClick={this.showPage}><a href=''>Get Started</a></li>
+              <li onClick={this.showPage}><a href=''>Sign In</a></li>
             </ul>
           </div >
-          <div className='grey' onClick={this.hideMenu}>
+          <div className='grey' onClick={this.showPage}>
           </div>
         </div>
       );
-    } else if (this.state.menuClicked) {
+    } else {
       return (
 
-        <div className='fas fa-bars' onClick={this.showMenu}>
+        <div className='fas fa-bars' onClick={this.showPage}>
         </div>
       );
     }
-    return (
-
-      <div className='fas fa-bars' onClick={this.showMenu}>
-      </div>
-    );
   }
 }
 
