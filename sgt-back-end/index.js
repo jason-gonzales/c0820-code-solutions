@@ -24,8 +24,8 @@ app.get('/api/grades', (req, res) => {
 });
 
 app.post('/api/grades', (req, res) => {
-  const id = req.body;
-  if (!Number.isInteger(id.grade) || id.grade <= 0) {
+  const body = req.body;
+  if (!Number.isInteger(body.grade) || body.grade <= 0) {
     return res.status(400).json({
       error: 'invalid grade'
     });
@@ -36,11 +36,11 @@ app.post('/api/grades', (req, res) => {
  values ($1, $2, $3)
  returning *
  `;
-  const values = [id.name, id.course, id.grade];
+  const values = [body.name, body.course, body.grade];
 
   db.query(sql, values)
     .then(result =>
-      res.status(201).json(result.rows))
+      res.status(201).json(result.rows[0]))
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: 'An unexpected error occurred' });
@@ -48,7 +48,7 @@ app.post('/api/grades', (req, res) => {
 });
 
 app.put('/api/grades/:gradeId', (req, res) => {
-  const id = req.body;
+  const body = req.body;
   const gradeId = parseInt(req.params.gradeId, 10);
 
   if (gradeId <= 0 || !Number.isInteger(gradeId)) {
@@ -57,7 +57,7 @@ app.put('/api/grades/:gradeId', (req, res) => {
     });
     return;
   }
-  if (!id.grade || id.grade < 0) {
+  if (!body.grade || body.grade < 0) {
     res.status(400).json({
       error: 'invalid grade'
     });
@@ -73,7 +73,7 @@ app.put('/api/grades/:gradeId', (req, res) => {
   returning *
   `;
 
-  const values = [id.name, id.course, id.grade, gradeId];
+  const values = [body.name, body.course, body.grade, gradeId];
   db.query(sql, values)
     .then(result => {
       if (!result.rows[0]) {
@@ -99,6 +99,7 @@ app.delete('/api/grades/:gradeId', (req, res, next) => {
     res.status(400).json({
       error: `${gradeId} is an invalid gradeId`
     });
+    return;
   }
 
   const sql = `
