@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 const unique = array => {
   const result = [];
   array.forEach((el, index) => {
@@ -8,3 +9,4 @@ const unique = array => {
   });
   return result;
 };
+
