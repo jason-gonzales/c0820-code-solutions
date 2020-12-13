@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 const intersection = (first, second) => {
   const result = [];
   first.forEach(el => {
@@ -8,3 +9,5 @@ const intersection = (first, second) => {
   });
   return result;
 };
+
+

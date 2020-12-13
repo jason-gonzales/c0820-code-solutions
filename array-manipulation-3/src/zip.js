@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 const zip = (first, second) => {
   const result = [];
   let array = null;
@@ -12,3 +13,4 @@ const zip = (first, second) => {
   }
   return result;
 };
+r

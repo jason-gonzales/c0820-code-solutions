@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 const union = (first, second) => {
   const result = first;
   second.forEach(el => {
@@ -8,3 +9,5 @@ const union = (first, second) => {
   });
   return result;
 };
+
+

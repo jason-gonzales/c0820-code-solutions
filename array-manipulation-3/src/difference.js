@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 const difference = (first, second) => {
   const result = [];
   first.forEach(el => {
@@ -14,3 +15,4 @@ const difference = (first, second) => {
   });
   return result;
 };
+
